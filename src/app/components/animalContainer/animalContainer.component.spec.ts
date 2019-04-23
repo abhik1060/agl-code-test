@@ -1,23 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnimalPageComponent } from './petPage.component';
+import { AnimalContainerComponent } from './animalContainer.component';
 import { AnimalResultComponent } from '../animalResult/animalResult.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('AnimalPageComponent', () => {
-  let component: AnimalPageComponent;
-  let fixture: ComponentFixture<AnimalPageComponent>;
+describe('AnimalContainerComponent', () => {
+  let component: AnimalContainerComponent;
+  let fixture: ComponentFixture<AnimalContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      declarations: [AnimalPageComponent, AnimalResultComponent],
+      declarations: [AnimalContainerComponent, AnimalResultComponent],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnimalPageComponent);
+    fixture = TestBed.createComponent(AnimalContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

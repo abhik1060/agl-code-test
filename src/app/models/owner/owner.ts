@@ -4,7 +4,7 @@ export type Gender = 'Male' | 'Female';
 
 export class Owner {
   name: string;
-  animals: Animal[];
+  pets: Animal[];
   gender: Gender;
   age: number;
 }
