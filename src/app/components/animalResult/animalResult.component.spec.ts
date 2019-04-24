@@ -57,6 +57,4 @@ describe('AnimalResultComponent', () => {
     expect(titleEl.nativeElement.innerHTML === titleText).toBeTruthy();
     expect(titleEl.nativeElement.innerHTML === '').toBeFalsy();
   });
-
-  
 });

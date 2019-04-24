@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { DataService } from './data.service';
 import { Owner } from '../models/owner/owner';
 import { Animal } from '../models/animal/animal';
+import { environment } from '../../environments/environment';
 
 describe('DataService', () => {
   let injector: TestBed;
@@ -62,7 +63,7 @@ describe('DataService', () => {
         expect(owners).toBe(mockOwners);
       });
 
-    const mockReq = httpMock.expectOne(service.RESOURCE_URL_ENDPOINT);
+    const mockReq = httpMock.expectOne(environment.endpoint);
 
     expect(mockReq.cancelled).toBeFalsy();
     expect(mockReq.request.responseType).toEqual('json');
@@ -94,32 +95,28 @@ describe('DataService', () => {
     service
       .getAnimalOwners()
       .subscribe((owners: Owner[]) => {
-        // Only Cats
         const onlyBeCats = service
-          .owenedByGenderAndSorted('Male', 'Cat', owners);
+          .ownedByGenderAndSorted('Male', 'Cat', owners);
         expect(onlyBeCats.every((pet: Animal) => pet.type === 'Cat')).toBeTruthy();
         expect(onlyBeCats.every((pet: Animal) => pet.type === 'Dog')).toBeFalsy();
 
-        // Only Dogs
         const onlyBeDogs = service
-          .owenedByGenderAndSorted('Male', 'Dog', owners);
+          .ownedByGenderAndSorted('Male', 'Dog', owners);
         expect(onlyBeDogs.every((pet: Animal) => pet.type === 'Dog')).toBeTruthy();
         expect(onlyBeDogs.every((pet: Animal) => pet.type === 'Bird')).toBeFalsy();
 
-        // Only Birds
         const onlyBeBirds = service
-          .owenedByGenderAndSorted('Female', 'Bird', owners);
+          .ownedByGenderAndSorted('Female', 'Bird', owners);
         expect(onlyBeBirds.every((pet: Animal) => pet.type === 'Bird')).toBeTruthy();
         expect(onlyBeBirds.every((pet: Animal) => pet.type === 'Fish')).toBeFalsy();
 
-        // Only Fish
         const onlyBeFish = service
-          .owenedByGenderAndSorted('Female', 'Fish', owners);
+          .ownedByGenderAndSorted('Female', 'Fish', owners);
         expect(onlyBeFish.every((pet: Animal) => pet.type === 'Fish')).toBeTruthy();
         expect(onlyBeFish.every((pet: Animal) => pet.type === 'Cat')).toBeFalsy();
       });
 
-    const mockReq = httpMock.expectOne(service.RESOURCE_URL_ENDPOINT);
+    const mockReq = httpMock.expectOne(environment.endpoint);
     mockReq.flush(mockOwners);
   });
 
@@ -146,20 +143,19 @@ describe('DataService', () => {
     service
       .getAnimalOwners()
       .subscribe((owners: Owner[]) => {
-        // Only Pets of Owners That Are Male
+
         const onlyMaleOwnerPets = service
-          .owenedByGenderAndSorted('Male', 'Dog', owners);
+          .ownedByGenderAndSorted('Male', 'Dog', owners);
         expect(onlyMaleOwnerPets.every((pet: Animal) => pet.name === 'Fido')).toBeTruthy();
         expect(onlyMaleOwnerPets.every((pet: Animal) => pet.name === 'Boxer')).toBeFalsy();
 
-        // Only Pets of Owners That Are Female
         const onlyFemaleOwnerPets = service
-          .owenedByGenderAndSorted('Female', 'Dog', owners);
+          .ownedByGenderAndSorted('Female', 'Dog', owners);
         expect(onlyFemaleOwnerPets.every((pet: Animal) => pet.name === 'Boxer')).toBeTruthy();
         expect(onlyFemaleOwnerPets.every((pet: Animal) => pet.name === 'Fido')).toBeFalsy();
       });
 
-    const mockReq = httpMock.expectOne(service.RESOURCE_URL_ENDPOINT);
+    const mockReq = httpMock.expectOne(environment.endpoint);
     mockReq.flush(mockOwners);
   });
 
@@ -198,20 +194,18 @@ describe('DataService', () => {
     service
       .getAnimalOwners()
       .subscribe((owners: Owner[]) => {
-        // Pets of Male Owners Are Sorted Alphabetically
         const onlyMaleOwnedDogs = service
-          .owenedByGenderAndSorted('Male', 'Dog', owners)
+          .ownedByGenderAndSorted('Male', 'Dog', owners)
           .map((pet: Animal) => pet.name);
         expect(onlyMaleOwnedDogs).toEqual(expectedMaleOwnedDogNames);
 
-        // Pets of Female Owners Are Sorted Alphabetically
         const onlyFemaleOwnedCats = service
-          .owenedByGenderAndSorted('Female', 'Cat', owners)
+          .ownedByGenderAndSorted('Female', 'Cat', owners)
           .map((pet: Animal) => pet.name);
         expect(onlyFemaleOwnedCats).toEqual(expectedFemaleOwnedCatNames);
       });
 
-    const mockReq = httpMock.expectOne(service.RESOURCE_URL_ENDPOINT);
+    const mockReq = httpMock.expectOne(environment.endpoint);
     mockReq.flush(mockOwners);
   });
 
@@ -268,20 +262,19 @@ describe('DataService', () => {
     service
       .getAnimalOwners()
       .subscribe((owners: Owner[]) => {
-        // Cats of Male Owners Are Sorted Alphabetically
+
         const onlyMaleOwnedCats = service
-          .owenedByGenderAndSorted('Male', 'Cat', owners)
+          .ownedByGenderAndSorted('Male', 'Cat', owners)
           .map((pet: Animal) => pet.name);
         expect(onlyMaleOwnedCats).toEqual(expectedMaleOwnedCatNames);
 
-        // Cats of Female Owners Are Sorted Alphabetically
         const onlyFemaleOwnedCats = service
-          .owenedByGenderAndSorted('Female', 'Cat', owners)
+          .ownedByGenderAndSorted('Female', 'Cat', owners)
           .map((pet: Animal) => pet.name);
         expect(onlyFemaleOwnedCats).toEqual(expectedFemaleOwnedCatNames);
       });
 
-    const mockReq = httpMock.expectOne(service.RESOURCE_URL_ENDPOINT);
+    const mockReq = httpMock.expectOne(environment.endpoint);
     mockReq.flush(mockOwners);
   });
 });

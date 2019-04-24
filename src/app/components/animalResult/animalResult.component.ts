@@ -6,13 +6,7 @@ import { Animal } from 'src/app/models/animal/animal';
   templateUrl: './animalResult.component.html',
   styleUrls: ['./animalResult.component.css']
 })
-export class AnimalResultComponent implements OnInit {
-  
+export class AnimalResultComponent{
   @Input() animals: Animal[];
   @Input() title: string;
-  
-
-  constructor() { }
-
-  ngOnInit() { }
 }

@@ -18,13 +18,11 @@ export class AnimalContainerComponent implements OnInit {
     this.dataService.getAnimalOwners().subscribe(
       ownerList => {
         this.catsOwnedByMales = this.dataService
-          .owenedByGenderAndSorted('Male', 'Cat', ownerList);
+          .ownedByGenderAndSorted('Male', 'Cat', ownerList);
 
         this.catsOwnedByFemales = this.dataService
-          .owenedByGenderAndSorted('Female', 'Cat', ownerList);
+          .ownedByGenderAndSorted('Female', 'Cat', ownerList);
       }
     );
   }
-
-
 }
